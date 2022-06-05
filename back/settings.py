@@ -30,8 +30,6 @@ SECRET_KEY = 'iz(xlc4&dp6_ewt=gwh1w=gi=%634cd4f6vv*gl5xucmgq^u3&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 AUTH_USER_MODEL = 'authorization.Account'
 # Application definition
 AUTHENTICATION_BACKENDS = (
