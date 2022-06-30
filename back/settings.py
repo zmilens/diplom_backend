@@ -38,7 +38,8 @@ AUTHENTICATION_BACKENDS = (
 )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-ALLOWED_HOSTS = ['diplom.std-860.ist.mospolytech.ru']
+ALLOWED_HOSTS = ['diplom.std-860.ist.mospolytech.ru', '127.0.0.1']
+CART_SESSION_ID = 'cart'
 
 INSTALLED_APPS = [
     'django.contrib.admin',

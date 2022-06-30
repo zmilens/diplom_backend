@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import Group
 #create a new user
 #create a superuser
 class MyAccountManager(BaseUserManager):
@@ -44,6 +45,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
     phone = models.CharField(max_length=12, null=True, blank=True) 
     date_of_birth = models.DateField(null=True, blank=True)
+    group = models.CharField(max_length=120, null=True, blank=True) 
     
     objects = MyAccountManager()
 
