@@ -23,8 +23,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shop/', include('shop.urls')),
-    path('cart/', include('cart.urls')),
-    path('auth/', include('authorization.urls')),
+    path('shop', include('shop.urls')),
+    path('cart', include('cart.urls')),
+    path('auth', include('authorization.urls')),
     path('@me', userdata_view)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

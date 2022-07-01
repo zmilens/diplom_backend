@@ -26,13 +26,20 @@ class CartProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CartProduct
-        fields = ['id', 'product', 'qty', 'final_price']
+        fields = ['id', 'product', 'qty', 'final_price', 'cart', 'user']
 
 class CartSerializer(serializers.ModelSerializer):
 
 
     products = CartProductSerializer(many=True)
-    owner = AccountSerializer()
+    # owner = AccountSerializer()
     class Meta:
         model = Cart
         fields = '__all__'
+
+    # def save(self):
+    #     cart = Cart()
+    #     cart.owner=self.validated_data['owner']
+    #     print(cart.owner)
+    #     cart.save()
+    #     return cart
