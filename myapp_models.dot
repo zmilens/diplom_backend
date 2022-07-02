@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2022-06-28 14:35
+  // Created: 2022-07-02 23:48
   // Cli Options: -a -o myapp_models.dot
 
   fontname = "Roboto"
@@ -325,6 +325,24 @@ digraph model_graph {
     color=olivedrab4
     style="rounded"
   
+    django_contrib_auth_models_PermissionsMixin [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      PermissionsMixin
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">is_superuser</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">BooleanField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
     django_contrib_auth_base_user_AbstractBaseUser [label=<
       <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
       <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -351,24 +369,6 @@ digraph model_graph {
       </TABLE>
       >]
   
-    django_contrib_auth_models_PermissionsMixin [label=<
-      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-      PermissionsMixin
-      </B></FONT></TD></TR>
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto">is_superuser</FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto">BooleanField</FONT>
-      </TD></TR>
-    
-    
-      </TABLE>
-      >]
-  
     authorization_models_Account [label=<
       <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
       <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -381,14 +381,6 @@ digraph model_graph {
       <FONT FACE="Roboto"><B>id</B></FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto"><B>AutoField</B></FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>group</B></FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
       </TD></TR>
     
     
@@ -413,6 +405,14 @@ digraph model_graph {
       <FONT FACE="Roboto">email</FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto">EmailField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">group</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
       </TD></TR>
     
     
@@ -606,14 +606,6 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto">slug</FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto">SlugField</FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
       <FONT FACE="Roboto">title</FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto">CharField</FONT>
@@ -704,14 +696,6 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto">slug</FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto">SlugField</FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
       <FONT FACE="Roboto">stock</FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto">PositiveIntegerField</FONT>
@@ -743,11 +727,11 @@ digraph model_graph {
     color=olivedrab4
     style="rounded"
   
-    cart_models_Order [label=<
+    cart_models_CartProduct [label=<
       <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
       <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
       <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-      Order
+      CartProduct
       </B></FONT></TD></TR>
     
     
@@ -760,7 +744,179 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>customer</B></FONT>
+      <FONT FACE="Roboto"><B>cart</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>product</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>user</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">final_price</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DecimalField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">qty</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">PositiveIntegerField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    cart_models_Cart [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Cart
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>owner</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>OneToOneField (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">final_price</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DecimalField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">total_products</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">PositiveIntegerField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_order {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>order</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    order_models_OrderProduct [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      OrderProduct
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>order</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>product</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>user</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">final_price</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DecimalField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">qty</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">PositiveIntegerField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    order_models_Order [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Order
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>owner</B></FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
       </TD></TR>
@@ -784,51 +940,25 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">final_price</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DecimalField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
       <FONT FACE="Roboto">status</FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto">IntegerField</FONT>
       </TD></TR>
     
     
-      </TABLE>
-      >]
-  
-    cart_models_ProductsInOrder [label=<
-      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-      ProductsInOrder
-      </B></FONT></TD></TR>
-    
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>id</B></FONT>
+      <FONT FACE="Roboto">total_products</FONT>
       </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto"><B>AutoField</B></FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>order</B></FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto"><B>product</B></FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-      </TD></TR>
-    
-    
-    
-      <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto">quantity</FONT>
-      </TD><TD ALIGN="LEFT">
-      <FONT FACE="Roboto">PositiveSmallIntegerField</FONT>
+      <FONT FACE="Roboto">PositiveIntegerField</FONT>
       </TD></TR>
     
     
@@ -860,9 +990,6 @@ digraph model_graph {
 
 
   authorization_models_Account -> django_contrib_auth_models_Group
-  [label=" group (group)"] [arrowhead=none, arrowtail=dot, dir=both];
-
-  authorization_models_Account -> django_contrib_auth_models_Group
   [label=" groups (user)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   authorization_models_Account -> django_contrib_auth_models_Permission
@@ -891,17 +1018,39 @@ digraph model_graph {
   [label=" shop (shop)"] [arrowhead=none, arrowtail=dot, dir=both];
 
 
-  cart_models_Order -> authorization_models_Account
-  [label=" customer (customer)"] [arrowhead=none, arrowtail=dot, dir=both];
+  cart_models_CartProduct -> authorization_models_Account
+  [label=" user (cartproduct)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  cart_models_Order -> shop_models_Shop
-  [label=" shop (order)"] [arrowhead=none, arrowtail=dot, dir=both];
+  cart_models_CartProduct -> cart_models_Cart
+  [label=" cart (related_products)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  cart_models_ProductsInOrder -> cart_models_Order
-  [label=" order (productsinorder)"] [arrowhead=none, arrowtail=dot, dir=both];
+  cart_models_CartProduct -> shop_models_Product
+  [label=" product (cartproduct)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  cart_models_ProductsInOrder -> shop_models_Product
-  [label=" product (count_in_order)"] [arrowhead=none, arrowtail=dot, dir=both];
+  cart_models_Cart -> authorization_models_Account
+  [label=" owner (cart)"] [arrowhead=none, arrowtail=none, dir=both];
+
+  cart_models_Cart -> cart_models_CartProduct
+  [label=" products (related_cart)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+
+  order_models_OrderProduct -> authorization_models_Account
+  [label=" user (orderproduct)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  order_models_OrderProduct -> order_models_Order
+  [label=" order (related_products)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  order_models_OrderProduct -> shop_models_Product
+  [label=" product (orderproduct)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  order_models_Order -> authorization_models_Account
+  [label=" owner (order)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  order_models_Order -> shop_models_Shop
+  [label=" shop (order_shop)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  order_models_Order -> order_models_OrderProduct
+  [label=" products (related_order)"] [arrowhead=dot arrowtail=dot, dir=both];
 
 
 }

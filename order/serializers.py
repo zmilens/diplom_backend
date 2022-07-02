@@ -1,20 +1,21 @@
 from rest_framework import serializers
-from .models import Order, ProductsInOrder
+from .models import Order, OrderProduct
+from shop.serializers import ProductSerializer
 from authorization.serializers import AccountSerializer
 
-
-class ProductsInOrderSerializer(serializers.ModelSerializer):
+class OrderProductSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
 
     class Meta:
-        model = ProductsInOrder
-        fields = '__all__'
+        model = OrderProduct
+        fields = ['product', 'qty', 'final_price']
 
 class OrderSerializer(serializers.ModelSerializer):
 
-    products = ProductsInOrderSerializer(many=True)
+    products = OrderProductSerializer(many=True)
     # products = CartProductSerializer()
-    customer = AccountSerializer()
+    # owner = AccountSerializer()
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['id', 'products', 'final_price' , 'created', 'status', 'owner']

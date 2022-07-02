@@ -38,6 +38,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 			account.groups.add(Group.objects.get(name='customer'))
 		elif group == ('operator'):
 			account.groups.add(Group.objects.get(name='operator'))
+			account.is_active=False
+			print(account.is_active)
+			account.save()
 		elif group == ('shop owner'):
 			account.groups.add(Group.objects.get(name='shop owner'))
 		# 	shop = Shop(

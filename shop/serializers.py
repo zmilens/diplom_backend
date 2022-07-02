@@ -15,7 +15,7 @@ class OperatorSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Account
-        fields = ['name', 'last_name', 'email', 'is_staff', 'phone']
+        fields = ['name', 'last_name', 'email', 'is_active', 'phone']
 
 class StaffSerializer(serializers.ModelSerializer):
 

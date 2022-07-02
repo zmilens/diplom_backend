@@ -23,6 +23,7 @@ def registration_view(request):
             data['name'] = account.name
             data['last_name'] = account.last_name
             data['group'] = account.group
+            data['is_active'] = account.is_active
         else:
             data.serializer.errors
         return Response(data)

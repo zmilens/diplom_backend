@@ -25,12 +25,21 @@ def StaffApi(request, id=0):
         return JsonResponse(serializer.data, safe=False)
     elif request.method=='PUT':
         print(request.data)
+        # operator_data =JSONParser().parse(request)
         operator_data = request.data
         staff = Staff.objects.get(operator=operator_data['operator'])
         operator = Account.objects.get(email=staff.operator)
+        print(operator.is_active)
         operator.is_active=operator_data['is_active']
         print(operator.is_active)
-        return JsonResponse("Доступ изменен", safe=False)
+        operator_serializers = OperatorSerializer(operator, operator_data)
+        operator.save()
+        # if operator_serializers.is_valid():
+        #     operator_serializers.save()
+        #     print(operator_serializers.data)
+        #     return JsonResponse("Доступ изменен", operator_serializers.data, safe=False)
+        return JsonResponse(operator.is_active, safe=False)
+        # print(operator_serializers.data)
     return JsonResponse("not ok", safe=False)
 
 @csrf_exempt
