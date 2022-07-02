@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'authorization',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'order.apps.OrderConfig',
     'import_export',
     'django_extensions',
     'api',

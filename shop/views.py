@@ -1,13 +1,37 @@
+from ast import operator
 from unicodedata import category
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import ShopSerializer, ProductSerializer, CategorySerializer
+
+from authorization.models import Account
+from .serializers import ShopSerializer, ProductSerializer, CategorySerializer, StaffSerializer, OperatorSerializer
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
-from .models import Shop, Product, Category
+from .models import Shop, Product, Category, Staff
 
+@csrf_exempt
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def StaffApi(request, id=0):
+    if request.method=='GET':
+        owner = Account.objects.get(id=request.user.id)
+        shop = Shop.objects.get(owner=owner)
+        print(shop)
+        staff = Staff.objects.filter(shop=shop)
+        # staff = Staff.objects.all()
+        # if staff.shop==shop:
+        serializer = StaffSerializer(staff, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method=='PUT':
+        print(request.data)
+        operator_data = request.data
+        staff = Staff.objects.get(operator=operator_data['operator'])
+        operator = Account.objects.get(email=staff.operator)
+        operator.is_active=operator_data['is_active']
+        print(operator.is_active)
+        return JsonResponse("Доступ изменен", safe=False)
+    return JsonResponse("not ok", safe=False)
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])

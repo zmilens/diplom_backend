@@ -3,22 +3,7 @@ from rest_framework import serializers
 
 from authorization.serializers import AccountSerializer
 from shop.serializers import ProductSerializer
-from .models import Cart, CartProduct, Order, ProductsInOrder
-
-class ProductsInOrderSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ProductsInOrder
-        fields = '__all__'
-
-class OrderSerializer(serializers.ModelSerializer):
-
-    products = ProductsInOrderSerializer()
-    customer = AccountSerializer()
-
-    class Meta:
-        model = Order
-        fields = '__all__'
+from .models import Cart, CartProduct
 
 class CartProductSerializer(serializers.ModelSerializer):
 
