@@ -10,6 +10,7 @@ from .serializers import ShopSerializer, ProductSerializer, CategorySerializer, 
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 from .models import Shop, Product, Category, Staff
+from django.core.files.storage import default_storage
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -38,36 +39,37 @@ def StaffApi(request, id=0):
         #     operator_serializers.save()
         #     print(operator_serializers.data)
         #     return JsonResponse("Доступ изменен", operator_serializers.data, safe=False)
-        return JsonResponse(operator.is_active, safe=False)
+        return JsonResponse({"Статус изменен на:": operator.is_active}, safe=False)
         # print(operator_serializers.data)
     return JsonResponse("not ok", safe=False)
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def ShopApi(request, id=0):
-    if request.method=='GET':
-        shops = Shop.objects.all()
-        serializer = ShopSerializer(shops, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    elif request.method=='POST':
-        shop_data=JSONParser().parse(request)
-        serializer = ShopSerializer(data=shop_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Магазин добавлен успешно!", safe=False)
-        return JsonResponse("Магазин не добавлен.", safe=False)
-    elif request.method=='PUT':
-        shop_data = JSONParser().parse(request)
-        shops = Shop.objects.get(id=shop_data['id'])
-        serializer = ShopSerializer(shops, data=shop_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Информация об магазине обновлена успешно!", safe=False)
-        return JsonResponse("Информация об магазине не обновлена.", safe=False)
-    elif request.method=='DELETE':
-        shops = Shop.objects.get(id=id)
-        shops.delete()
-        return JsonResponse("Магазин удален из базы данных.", safe=False)
+    if request.user.is_authenticated:
+        if request.method=='GET':
+            shops = Shop.objects.all()
+            serializer = ShopSerializer(shops, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        elif request.method=='POST':
+            shop_data=JSONParser().parse(request)
+            serializer = ShopSerializer(data=shop_data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse("Магазин добавлен успешно!", safe=False)
+            return JsonResponse("Магазин не добавлен.", safe=False)
+        elif request.method=='PUT':
+            shop_data = JSONParser().parse(request)
+            shops = Shop.objects.get(id=shop_data['id'])
+            serializer = ShopSerializer(shops, data=shop_data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse("Информация об магазине обновлена успешно!", safe=False)
+            return JsonResponse("Информация об магазине не обновлена.", safe=False)
+        elif request.method=='DELETE':
+            shops = Shop.objects.get(id=id)
+            shops.delete()
+            return JsonResponse("Магазин удален из базы данных.", safe=False)
 
 
 class ShopViewSet(viewsets.ModelViewSet):
@@ -83,12 +85,14 @@ def ProductApi(request, id=0):
         serializer = ProductSerializer(products, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method=='POST':
-        product_data=JSONParser().parse(request)
-        serializer = ProductSerializer(data=product_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Товар добавлен успешно!", safe=False)
-        return JsonResponse("Товар не добавлен.", safe=False)
+        if request.user.is_authenticated:
+            product_data=JSONParser().parse(request)
+            serializer = ProductSerializer(data=product_data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse("Товар добавлен успешно!", safe=False)
+            return JsonResponse("Товар не добавлен.", safe=False)
+        return JsonResponse("Пользователь не авторизован", safe=False)
     elif request.method=='PUT':
         product_data = JSONParser().parse(request)
         products = Product.objects.get(id=product_data['id'])
@@ -110,3 +114,11 @@ def CategoryApi(request, id=0):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+
+@csrf_exempt
+def SaveFile(request):
+    file = request.FILES['uploadedFile']
+    file_name = default_storage.save(file.name, file)
+
+    return JsonResponse(file_name, safe=False)

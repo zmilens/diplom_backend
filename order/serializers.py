@@ -14,7 +14,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     products = OrderProductSerializer(many=True)
     # products = CartProductSerializer()
-    # owner = AccountSerializer()
+    owner = AccountSerializer()
 
     class Meta:
         model = Order
