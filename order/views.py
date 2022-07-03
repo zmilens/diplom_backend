@@ -8,6 +8,7 @@ from shop.models import Product, Staff
 from .models import Order, OrderProduct
 from .serializers import OrderSerializer
 from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -52,3 +53,13 @@ def OrderApi(request, id=0):
         print(staff.shop)
         print(order)
         return JsonResponse(order_serializer.data, safe=False)
+    elif request.method=='PUT':
+        # { orderId: number, status: number }
+        order_data = JSONParser().parse(request)
+        order = Order.objects.get(id=order_data['orderId'])
+        order.status = order_data['status']
+        # order_serializer = OrderSerializer(order, order_data)
+        order.save()
+        return JsonResponse({"Статус заказа изменен на:": order.status}, safe=False)
+        # print(operator_serializers.data)
+    return JsonResponse("not ok", safe=False)
