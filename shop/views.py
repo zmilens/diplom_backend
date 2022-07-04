@@ -86,11 +86,18 @@ def ProductApi(request, id=0):
         return JsonResponse(serializer.data, safe=False)
     elif request.method=='POST':
         if request.user.is_authenticated:
+            # product_data=JSONParser().parse(request)
+            # serializer = ProductSerializer(data=product_data)
+
+            # try:
+            #     staff = Staff.objects.get(shop=product_data['shop'], operator=request.user.id)
+            # except Staff.DoesNotExist:
+            #     return JsonResponse({'message':'Iincorrect shop id'}, status=400)
             product_data=JSONParser().parse(request)
             serializer = ProductSerializer(data=product_data)
             if serializer.is_valid():
                 serializer.save()
-                return JsonResponse("Товар добавлен успешно!", safe=False)
+                return JsonResponse(serializer.data, safe=False)
             return JsonResponse("Товар не добавлен.", safe=False)
         return JsonResponse("Пользователь не авторизован", safe=False)
     elif request.method=='PUT':
@@ -99,7 +106,7 @@ def ProductApi(request, id=0):
         serializer = ProductSerializer(products, data=product_data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Информация о товаре обновлена успешно!", safe=False)
+            return JsonResponse(serializer.data, safe=False)
         return JsonResponse("Информация о товаре не обновлена.", safe=False)
     elif request.method=='DELETE':
         products = Product.objects.get(id=id)
@@ -121,4 +128,4 @@ def SaveFile(request):
     file = request.FILES['uploadedFile']
     file_name = default_storage.save(file.name, file)
 
-    return JsonResponse(file_name, safe=False)
+    return JsonResponse({'name': file_name}, safe=False)

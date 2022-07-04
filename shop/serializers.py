@@ -23,14 +23,14 @@ class StaffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Staff
-        fields = ['operator']
+        fields = ['operator',]
 
 class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
         fields = ['id', 'category', 'name', 'image', 'description', 'price', 
-        'stock', 'available', 'created', 'updated', 'shop_id']
+        'stock', 'available', 'created', 'updated', 'shop']
 
 
 class CategorySerializer(serializers.ModelSerializer):
