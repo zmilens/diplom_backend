@@ -41,7 +41,8 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='category', on_delete=models.PROTECT)
     name = models.CharField(max_length=200, db_index=True)
-    image = models.ImageField(max_length=255, upload_to='products/%Y/%m/%d', blank=True)
+    # image = models.ImageField(max_length=255, upload_to='products/%Y/%m/%d', blank=True)
+    image = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
