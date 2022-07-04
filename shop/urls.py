@@ -8,8 +8,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('/shops', ShopApi),
-    # path('/products/<int:id>', ProductApi),
     path('/products', ProductApi),
+    path('/products/<int:id>', ProductApi),
     path('/categories', CategoryApi),
     path('/staff', StaffApi),
     path('/file', SaveFile)
