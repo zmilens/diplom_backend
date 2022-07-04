@@ -34,14 +34,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 		
 		account.save()
-		if group == ('customer'):
+		if group == ('1'):
 			account.groups.add(Group.objects.get(name='customer'))
-		elif group == ('operator'):
+		elif group == ('2'):
 			account.groups.add(Group.objects.get(name='operator'))
 			account.is_active=False
 			print(account.is_active)
 			account.save()
-		elif group == ('shop owner'):
+		elif group == ('3'):
 			account.groups.add(Group.objects.get(name='shop owner'))
 		# 	shop = Shop(
 		# 		title='ggg',
